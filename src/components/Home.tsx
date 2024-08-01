@@ -37,7 +37,7 @@ const Home = () => {
         direction={"row"}
         spacing={"2rem"}
         p={"2rem"}
-        alighItems={"center"}
+        alignItems={"center"}
         justifyContent={"center"}
       >
         {languages.map((i) => (

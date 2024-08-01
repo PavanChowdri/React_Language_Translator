@@ -24,10 +24,15 @@ const generateMCQ = (
 
 export const translateWords = async (params: LangType): Promise<WordType[]> => {
   try {
-    const words = generate(8).map((i) => ({
-      Text: i,
+    const generatedWords = generate(8);
+    if (typeof generatedWords === "string") {
+      throw new Error("Generate did not return an array of strings");
+    }
+
+    const words: { Text: string }[] = generatedWords.map((word: string) => ({
+      Text: word,
     }));
-    const apikey=import.meta.env.VITE_MICROSOFT_TRANSLATOR;
+    const apikey = import.meta.env.VITE_MICROSOFT_TRANSLATOR;
 
     const response = await axios.post(
       "https://microsoft-translator-text.p.rapidapi.com/translate",
@@ -40,7 +45,7 @@ export const translateWords = async (params: LangType): Promise<WordType[]> => {
           textType: "plain",
         },
         headers: {
-          "x-rapidapi-key":apikey,
+          "x-rapidapi-key": apikey,
           "x-rapidapi-host": "microsoft-translator-text.p.rapidapi.com",
           "Content-Type": "application/json",
         },
