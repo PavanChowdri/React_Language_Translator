@@ -10,11 +10,9 @@ const generateMCQ = (
 ): string[] => {
   const correctAns: string = meaning[idx].Text;
 
-  // An Array with all words except for correct ans
   const allMeaningExceptForCorrect = meaning.filter(
     (i) => i.Text !== correctAns
   );
-  // Randomly generating 3 elements from incorrectArray
   const incorrectOptions: string[] = _.sampleSize(
     allMeaningExceptForCorrect,
     3
@@ -48,9 +46,7 @@ export const translateWords = async (params: LangType): Promise<WordType[]> => {
         },
       }
     );
-    // loading: false,
-    // words: [],
-    // result: [],
+
     const receive: FetchDataType[] = response.data;
 
     const arr: WordType[] = receive.map((i, idx) => {
